@@ -21,7 +21,7 @@ jobs:
             artifact-name: Linux
             build-options: ""
     name: "Build - ${{ matrix.artifact-name }}"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     container: ${{ matrix.container }}
     steps:
       - uses: actions/checkout@v4
@@ -39,20 +39,8 @@ jobs:
           path: build/allOutputs
 
   build-host:
-    env: 
-      MACOSX_DEPLOYMENT_TARGET: 13.3
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: windows-2022
-            artifact-name: Win64
-            architecture: x64
-          - os: macos-14
-            artifact-name: macOS
-            architecture: aarch64
-    name: "Build - ${{ matrix.artifact-name }}"
-    runs-on: ${{ matrix.os }}
+    name: "Build - Win64"
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -62,13 +50,13 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 17
-          architecture: ${{ matrix.architecture }}
+          java-version: 21
+          architecture: x64
       - name: Build with Gradle
         run: ./gradlew build -Pbuildalldesktop
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact-name }}
+          name: Win64
           path: build/allOutputs
 
   combine:
