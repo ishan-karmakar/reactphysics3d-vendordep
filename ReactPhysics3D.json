@@ -1,0 +1,32 @@
+{
+  "fileName": "ReactPhysics3D.json",
+  "name": "ReactPhysics3D",
+  "version": "0.0.1",
+  "frcYear": "2025",
+  "uuid": "7ff186bd-b198-4cdf-b9ce-589ec03f9f6f",
+  "mavenUrls": [
+      "https://github.com/ishan-karmakar/reactphysics3d-vendordep/blob/releases"
+  ],
+  "jsonUrl": "https://github.com/ishan-karmakar/reactphysics3d-vendordep/blob/ReactPhysics3D.json",
+  "javaDependencies": [],
+  "jniDependencies": [],
+  "cppDependencies": [
+      {
+          "groupId": "org.valor",
+          "artifactId": "rp3d-cpp",
+          "version": "0.0.1",
+          "libName": "Vendor",
+          "headerClassifier": "headers",
+          "sharedLibrary": false,
+          "skipInvalidPlatforms": true,
+          "binaryPlatforms": [
+              "windowsx86-64",
+              "linuxarm64",
+              "linuxx86-64",
+              "linuxathena",
+              "linuxarm32",
+              "osxuniversal"
+          ]
+      }
+  ]
+}
