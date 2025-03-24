@@ -6,6 +6,7 @@ apply plugin: 'maven-publish'
 ext.licenseFile = files("$rootDir/LICENSE.txt")
 
 def templateVendorFile = "ReactPhysics3D.json"
+def releasesDir = "releases"
 
 def pubVersion = '0.0.1'
 
@@ -89,11 +90,11 @@ addTaskToCopyAllOutputs(cppSourceZip)
 task vendordepJson() {
     description = 'Builds the vendordep json file.'
     group = 'Build'
-    outputs.file("$buildDir/repos/$templateVendorFile")
+    outputs.file(templateVendorFile)
 
     copy {
-        from templateVendorFile
-        into "$buildDir/repos/"
+        from "src/$templateVendorFile"
+        into rootDir
         expand(version: pubVersion,
                 groupId: artifactGroupId,
                 artifactId: baseArtifactId)
@@ -104,7 +105,7 @@ task vendordepJsonZip(type: Zip) {
     destinationDirectory = outputsFolder
     archiveBaseName = "vendordepJson"
 
-    from("$buildDir/repos/$templateVendorFile") {
+    from(templateVendorFile) {
         into '/'
     }
     dependsOn vendordepJson
@@ -116,27 +117,13 @@ build.dependsOn vendordepJsonZip
 
 libraryBuild.dependsOn build
 
-def releasesRepoUrl = "$buildDir/repos/releases"
-
 publishing {
     repositories {
         maven {
-            name = "GithubPackages"
-            url = uri("https://maven.pkg.github.com/ishan-karmakar/reactphysics3d-vendordep")
-
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-            }
+            url = releasesDir
         }
     }
 }
-
-task cleanReleaseRepo(type: Delete) {
-    delete releasesRepoUrl
-}
-
-tasks.matching {it != cleanReleaseRepo}.all {it.dependsOn cleanReleaseRepo}
 
 model {
     publishing {

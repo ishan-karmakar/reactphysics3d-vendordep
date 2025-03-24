@@ -1,7 +1,7 @@
 {
   "fileName": "ReactPhysics3D.json",
   "name": "ReactPhysics3D",
-  "version": "0.0.1",
+  "version": "${version}",
   "frcYear": "2025",
   "uuid": "7ff186bd-b198-4cdf-b9ce-589ec03f9f6f",
   "mavenUrls": [
@@ -12,9 +12,9 @@
   "jniDependencies": [],
   "cppDependencies": [
       {
-          "groupId": "org.valor",
-          "artifactId": "rp3d-cpp",
-          "version": "0.0.1",
+          "groupId": "${groupId}",
+          "artifactId": "${artifactId}-cpp",
+          "version": "${version}",
           "libName": "Vendor",
           "headerClassifier": "headers",
           "sharedLibrary": false,
