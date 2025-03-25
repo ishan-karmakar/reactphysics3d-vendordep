@@ -89,9 +89,11 @@ jobs:
           name: Maven
           path: $RUNNER_TEMP/releases
       - name: Copy releases from main
+        continue-on-error: true
         run: |
           rm -rf releases
           git checkout origin/main -- releases
+          mkdir -p releases
       - name: Combine new release
         run: cp -r $RUNNER_TEMP/releases/* releases/
       - name: Push to branch
