@@ -24,7 +24,7 @@ if (project.hasProperty('releaseMode')) {
 // Apply C++ configuration
 apply from: 'config.gradle'
 
-if (project.hasProperty('onlylinuxathena') || project.hasProperty('onlylinuxarm32') || project.hasProperty('onlylinuxarm64') || project.hasProperty('onlywindowsarm64') || project.hasProperty('onlylinuxsystemcore')) {
+if (project.hasProperty("noTests")) {
     test.enabled = false
 }
 

@@ -171,12 +171,17 @@ struct Vector3 {
 
 // Constructor of the struct Vector3
 RP3D_FORCE_INLINE Vector3::Vector3() : x(0.0), y(0.0), z(0.0) {
-
 }
 
 // Constructor with arguments
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable : 4723)
+#endif
 RP3D_FORCE_INLINE Vector3::Vector3(decimal newX, decimal newY, decimal newZ) : x(newX), y(newY), z(newZ) {
-
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
 }
 
 // Set the vector to zero

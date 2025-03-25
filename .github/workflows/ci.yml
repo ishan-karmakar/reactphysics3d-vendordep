@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build with Gradle
-        run: ./gradlew build ${{ matrix.build-options }}
+        run: ./gradlew build -PreleaseMode ${{ matrix.build-options }}
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact-name }}
