@@ -25,6 +25,7 @@ jobs:
             build-options: -Ponlylinuxarm64
     name: "Build - ${{ matrix.artifact-name }}"
     runs-on: ubuntu-latest
+    container: ${{ matrix.container }}
     steps:
       - uses: actions/checkout@v4
       - name: Build with Gradle
