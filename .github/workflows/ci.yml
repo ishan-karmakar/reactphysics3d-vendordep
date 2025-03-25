@@ -11,16 +11,16 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - container: wpilib/roborio-cross-ubuntu:2025-22.04-py313
+          - container: wpilib/roborio-cross-ubuntu:2025-22.04
             artifact-name: Athena
             build-options: -Ponlylinuxathena
           - container: wpilib/ubuntu-base:24.04
             artifact-name: Linux
             build-options: -Ponlylinuxx86-64
-          - container: wpilib/raspbian-cross-ubuntu:2025-bookworm-22.04-py313
+          - container: wpilib/raspbian-cross-ubuntu:bookworm-24.04
             artifact-name: Arm32
             build-options: -Ponlylinuxarm32
-          - container: wpilib/aarch64-cross-ubuntu:2025-bookworm-22.04-py313
+          - container: wpilib/aarch64-cross-ubuntu:bookworm-24.04
             artifact-name: Arm64
             build-options: -Ponlylinuxarm64
     name: "Build - ${{ matrix.artifact-name }}"
