@@ -24,8 +24,7 @@
               "linuxarm64",
               "linuxx86-64",
               "linuxathena",
-              "linuxarm32",
-              "osxuniversal"
+              "linuxarm32"
           ]
       }
   ]
