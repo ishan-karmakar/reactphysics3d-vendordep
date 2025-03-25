@@ -43,7 +43,7 @@ jobs:
   combine:
     name: Combine
     runs-on: ubuntu-latest
-    needs: [build-docker, build-host]
+    needs: [build-host]
     steps:
       - uses: actions/checkout@v4
         with:
