@@ -1,9 +1,8 @@
 name: CI
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
-  merge_group:
 
 jobs:
   build-docker:
@@ -53,11 +52,10 @@ jobs:
         with:
           name: Win64
           path: build/allOutputs
-
   combine:
     name: Combine
-    needs: [build-docker, build-host]
     runs-on: ubuntu-latest
+    needs: [build-docker, build-host]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -82,20 +80,23 @@ jobs:
     name: Push to branch
     runs-on: ubuntu-latest
     needs: combine
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: Maven
-          path: $RUNNER_TEMP/releases
+          path: ~/releases
       - name: Copy releases from main
         continue-on-error: true
         run: |
           rm -rf releases
           git checkout origin/main -- releases
-          mkdir -p releases
       - name: Combine new release
-        run: cp -r $RUNNER_TEMP/releases/* releases/
+        run: |
+          mkdir -p releases
+          cp -r ~/releases/* releases/
       - name: Push to branch
         run: |
           git config --global user.name "Ishan Karmakar"
